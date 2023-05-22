@@ -62,6 +62,8 @@ if [ ! -z "$OPENSSL_INSTALL" ]; then
     fi
     if [ -d $OPENSSL_INSTALL/lib64 ]; then
         export LD_LIBRARY_PATH=$OPENSSL_INSTALL/lib64
+        # To find Windows DLLs:
+        export PATH=$PATH:$OPENSSL_INSTALL/bin
     fi
     if [ -f $OPENSSL_INSTALL/ssl/openssl.cnf ]; then
         export OPENSSL_CONF=$OPENSSL_INSTALL/ssl/openssl.cnf
@@ -86,6 +88,8 @@ fi
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
     export LD_LIBRARY_PATH=$(pwd)/.local/lib64
+    # To find Windows DLLs:
+    export PATH=$PATH:$(pwd)/.local/bin
 fi
 
 if [ ! -z "$OQS_SKIP_TESTS" ]; then
